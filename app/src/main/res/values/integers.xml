@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="activity_open_close_anim_duration">400</integer>
+    <integer name="activity_animTime">400</integer>
+    <integer name="fast_transaction_duration">300</integer>
+</resources>

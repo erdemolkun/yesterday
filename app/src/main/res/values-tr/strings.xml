@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">@string/yesterday</string>
+    <string name="degree_sign">&#176;</string>
+    <string name="today">Bugün</string>
+    <string name="tomorrow">Yarın</string>
+    <string name="yesterday">Dün</string>
+    <string name="settings">Ayarlar</string>
+    <string name="ignore">Vazgeç</string>
+    <string name="ok">Tamam</string>
+    <string name="permission_location_rationale">Konum bilgisi için erişim izni vermeniz gerekmektedir.</string>
+    <string name="access_location_rationale">Konum bilgisine ihtiyaç vardır.</string>
+    <string name="close">Kapat</string>
+    <string name="error">Hata</string>
+    <string name="check_network_connection_title">Bağlantı Yok</string>
+    <string name="unknown_service_error">Sunucu ile bağlantıda hata oluştu.</string>
+    <string name="check_network_connection">İnternet bağlantınızı kontrol ediniz.</string>
+    <string name="timeout_service">Bağlantı zaman aşımına uğradı.</string>
+    <string name="retry">Tekrar Dene</string>
+
+    <string name="chanceflurries">İnce Kar Yağışı Bekleniyor</string>
+    <string name="chancerain">Yağmur Bekleniyor</string>
+    <string name="chancesleet">Sulu Kar Yağışı Bekleniyor</string>
+    <string name="chancesnow">Fırtına Bekleniyor</string>
+    <string name="chancetstorms">İnce Kar Yağışı Bekleniyor</string>
+    <string name="clear">Açık</string>
+
+    <string name="cloudy">Bulutlu</string>
+    <string name="flurries">İnce Kar Yağışlı</string>
+    <string name="fog">Sisli</string>
+    <string name="hazy">Sisli</string>
+    <string name="partlysunny">Parçalı Güneşli</string>
+    <string name="sleet">Sulu Kar Yağışlı</string>
+    <string name="mostlycloudy">Çoğunlukla Bulutlu</string>
+    <string name="rain">Yağmurlu</string>
+    <string name="snow">Kar Yağışlı</string>
+    <string name="sunny">Güneşli</string>
+    <string name="tstorms">Fırtınalı</string>
+    <string name="mostlysunny">Çoğunlukla Güneşli</string>
+    <string name="partlycloudy">Parçalı Bulutlu</string>
+    <string name="waiting_location_info">Konum Bilgisi Bekleniyor</string>
+    <string name="loading_weather_info">Hava Durumu Yükleniyor.</string>
+    <string name="play_services_should_be_updated">Google play servisleri güncellenmeli.</string>
+
+
+</resources>

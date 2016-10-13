@@ -1,0 +1,62 @@
+<resources>
+
+    <style name="FrameworkRoot.Theme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <!-- Base application theme. -->
+    <style name="Theme.Yesterday.Base" parent="FrameworkRoot.Theme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+        <item name="android:windowFullscreen">true</item>
+
+        <!--<item name="toolbarTheme">@style/ActionBarThemeOverlay</item>-->
+        <!--<item name="toolbarTextAppearance">@style/ActionBar.TitleText</item>-->
+
+        <!--<item name="actionBarIconColor">@android:color/white</item>-->
+        <!--<item name="actionBarInsetStart">@dimen/keyline_2</item>-->
+        <!--<item name="actionbarHeaderStyle">@style/HeaderBar</item>-->
+        <item name="android:splitMotionEvents">false</item>
+
+
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="colorControlHighlight">#5fff</item>
+
+
+    </style>
+
+    <style name="Theme.Yesterday.Home" parent="Theme.Yesterday.Base">
+        <item name="android:windowBackground">@drawable/ic_background</item>
+
+    </style>
+
+
+    <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+    <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorControlNormal">?actionBarIconColor</item>
+        <item name="colorControlHighlight">#3fff</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+
+    </style>
+
+    <style name="HeaderBar">
+        <item name="android:background">?colorPrimary</item>
+    </style>
+
+
+</resources>
