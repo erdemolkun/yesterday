@@ -65,8 +65,8 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
         request.expireAfter(1, TimeUnit.DAYS);
         request.setCachePolicy(Request.CACHE_POLICY_FETCH_AND_LEAVE);
         request.setLoadingIndicatorPolicy(Request.NO_LOADING);
-        request.addHeader("X-Parse-REST-API-Key", "a1Mr32H8hWzn9oy2n4iahv3szA3d3rucFoLhv7z6");
-        request.addHeader("X-Parse-Application-Id", "QjzdphLWuAUmUUJzDQtT3cWEUGeLuKPZgCupaIfQ");
+        request.header("X-Parse-REST-API-Key", "a1Mr32H8hWzn9oy2n4iahv3szA3d3rucFoLhv7z6");
+        request.header("X-Parse-Application-Id", "QjzdphLWuAUmUUJzDQtT3cWEUGeLuKPZgCupaIfQ");
         requestController.addToMainQueue(request, this);
 
     }
