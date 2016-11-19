@@ -1,5 +1,12 @@
 package com.protel.yesterday;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,12 +26,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.protel.network.Request;
 import com.protel.network.RequestController;
 import com.protel.network.Response;
@@ -78,8 +79,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
 
     private Snackbar snackbarWaitingGps;
     /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     * ATTENTION: This was auto-generated to implement the App Indexing API. See
+     * https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
 
@@ -239,7 +240,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
     }
 
     private void refreshViews() {
-        if (historyResponse != null) {
+        if (historyResponse != null && historyResponse.history != null) {
             Observation observationMax = WundergroundUtils.getDayMax(historyResponse.history.observations);
             Observation observationMin = WundergroundUtils.getDayMin(historyResponse.history.observations);
             int dayMax = DegreeUtils.getCelciusTemp(observationMax.tempi);
