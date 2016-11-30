@@ -42,12 +42,12 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
     private static final int REQUEST_PERMISSION_SETTINGS = 1;
 
     private static final String[] PERMISSIONS_LOCATION = {Manifest.permission.ACCESS_FINE_LOCATION};
-
+    ParseImagesResponse parseImagesResponse = null;
+    int imageIndex = 0;
     private View vRoot;
-
     private RequestController requestController;
-
     private long startTime;
+    private boolean locationPermissionDone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,6 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
         requestController.addToMainQueue(request, this);
 
     }
-
 
     private void startApp() {
         long systemMilis = System.currentTimeMillis();
@@ -98,8 +97,6 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
         YesterdayApp.getInstance().sendTestAnalytics(this);
         checkPermissionsAndStart();
     }
-
-    private boolean locationPermissionDone = false;
 
     private void checkPermissionsAndStart() {
         // Verify that all required location permissions have been granted.
@@ -199,9 +196,6 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
     public Context getContext() {
         return this;
     }
-
-    ParseImagesResponse parseImagesResponse = null;
-    int imageIndex = 0;
 
     @Override
     public void onResponse(Response response, Request request) {

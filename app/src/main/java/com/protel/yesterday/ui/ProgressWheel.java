@@ -18,13 +18,12 @@ import com.protel.yesterday.R;
 
 
 /**
- * A Material style progress wheel, compatible up to 2.2.
- * Todd Davies' Progress Wheel https://github.com/Todd-Davies/ProgressWheel
+ * A Material style progress wheel, compatible up to 2.2. Todd Davies' Progress Wheel
+ * https://github.com/Todd-Davies/ProgressWheel
  *
  * @author Nico Hormazábal
  *         <p/>
- *         Licensed under the Apache License 2.0 license see:
- *         http://www.apache.org/licenses/LICENSE-2.0
+ *         Licensed under the Apache License 2.0 license see: http://www.apache.org/licenses/LICENSE-2.0
  */
 public class ProgressWheel extends View {
     private static final String TAG = ProgressWheel.class.getSimpleName();
@@ -69,9 +68,6 @@ public class ProgressWheel extends View {
 
     /**
      * The constructor for the ProgressWheel
-     *
-     * @param context
-     * @param attrs
      */
     public ProgressWheel(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -82,8 +78,6 @@ public class ProgressWheel extends View {
 
     /**
      * The constructor for the ProgressWheel
-     *
-     * @param context
      */
     public ProgressWheel(Context context) {
         super(context);
@@ -136,9 +130,9 @@ public class ProgressWheel extends View {
     }
 
     /**
-     * Use onSizeChanged instead of onAttachedToWindow to getId the dimensions of the view,
-     * because this method is called after measuring the dimensions of MATCH_PARENT & WRAP_CONTENT.
-     * Use this dimensions to setup the bounds and paints.
+     * Use onSizeChanged instead of onAttachedToWindow to getId the dimensions of the view, because
+     * this method is called after measuring the dimensions of MATCH_PARENT & WRAP_CONTENT. Use this
+     * dimensions to setup the bounds and paints.
      */
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -150,8 +144,7 @@ public class ProgressWheel extends View {
     }
 
     /**
-     * Set the properties of the paints we're using to
-     * draw the progress wheel
+     * Set the properties of the paints we're using to draw the progress wheel
      */
     private void setupPaints() {
         barPaint.setColor(barColor);
@@ -390,8 +383,7 @@ public class ProgressWheel extends View {
     }
 
     /**
-     * Set the progress to a specific value,
-     * the bar will be set instantly to that value
+     * Set the progress to a specific value, the bar will be set instantly to that value
      *
      * @param progress the progress between 0 and 1
      */
@@ -464,8 +456,8 @@ public class ProgressWheel extends View {
     }
 
     /**
-     * @return the current progress between 0.0 and 1.0,
-     * if the wheel is indeterminate, then the result is -1
+     * @return the current progress between 0.0 and 1.0, if the wheel is indeterminate, then the
+     * result is -1
      */
     public float getProgress() {
         return isSpinning ? -1 : mProgress / 360.0f;
@@ -476,8 +468,7 @@ public class ProgressWheel extends View {
     //----------------------------------
 
     /**
-     * Set the progress to a specific value,
-     * the bar will smoothly animate until that value
+     * Set the progress to a specific value, the bar will smoothly animate until that value
      *
      * @param progress the progress between 0 and 1
      */
@@ -606,18 +597,16 @@ public class ProgressWheel extends View {
     }
 
     /**
-     * @return the base spinning speed, in full circle turns per second
-     * (1.0 equals on full turn in one second), this value also is applied for
-     * the smoothness when setting a progress
+     * @return the base spinning speed, in full circle turns per second (1.0 equals on full turn in
+     * one second), this value also is applied for the smoothness when setting a progress
      */
     public float getSpinSpeed() {
         return spinSpeed / 360.0f;
     }
 
     /**
-     * Sets the base spinning speed, in full circle turns per second
-     * (1.0 equals on full turn in one second), this value also is applied for
-     * the smoothness when setting a progress
+     * Sets the base spinning speed, in full circle turns per second (1.0 equals on full turn in one
+     * second), this value also is applied for the smoothness when setting a progress
      *
      * @param spinSpeed the desired base speed in full turns per second
      */

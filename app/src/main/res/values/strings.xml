@@ -16,7 +16,32 @@
     <string name="check_network_connection">Check your internet connection.</string>
     <string name="timeout_service">Connection timeout.</string>
     <string name="retry">Retry</string>
+
+
+    <string name="chanceflurries">İnce Kar Yağışı Bekleniyor</string>
+    <string name="chancerain">Yağmur Bekleniyor</string>
+    <string name="chancesleet">Sulu Kar Yağışı Bekleniyor</string>
+    <string name="chancesnow">Fırtına Bekleniyor</string>
+    <string name="chancetstorms">İnce Kar Yağışı Bekleniyor</string>
+    <string name="clear">Açık</string>
+
+    <string name="cloudy">Cloudly</string>
+    <string name="flurries">Flurries</string>
+    <string name="fog">Foggy</string>
+    <string name="hazy">Hazy</string>
+    <string name="partlysunny">Partly Sunny</string>
+    <string name="sleet">Sleet</string>
+    <string name="mostlycloudy">Mostly Cloudly</string>
+    <string name="rain">Rainny</string>
+    <string name="snow">Snowy</string>
+    <string name="sunny">Sunny</string>
+    <string name="storms">Stormy</string>
+    <string name="mostlysunny">Mostly Sunny</string>
+    <string name="partlycloudy">Partly Cloudy</string>
+
+
     <string name="waiting_location_info">Waiting Location Info</string>
     <string name="loading_weather_info">Loading Weather Info.</string>
     <string name="play_services_should_be_updated">Play services must be updated.</string>
+    <string name="refresh">Refresh</string>
 </resources>

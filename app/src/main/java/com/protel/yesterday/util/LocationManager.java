@@ -1,5 +1,18 @@
 package com.protel.yesterday.util;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -16,18 +29,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.protel.yesterday.R;
 import com.protel.yesterday.data.LatLng;
 import com.protel.yesterday.data.LocationHolder;
@@ -67,20 +68,18 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
 
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest = null;
-
-    public interface LocationCallback {
-        void onGotLocation(LatLng latLng);
-
-        void onLocationFetchError();
-
-        void onPrepare();
-    }
-
     private Activity activity;
     private LocationCallback locationCallback;
     private boolean finishOnPlayServicesError;
-
     private Boolean hasPermissions = null;
+    private LatLng currentLocation;
+    private boolean isRefresh = false;
+
+    public LocationManager(@NonNull Activity activity, boolean finishOnPlayServicesError, @NonNull LocationCallback locationCallback) {
+        this.activity = activity;
+        this.locationCallback = locationCallback;
+        this.finishOnPlayServicesError = finishOnPlayServicesError;
+    }
 
     public boolean hasPermissions() {
         if (hasPermissions == null) {
@@ -92,13 +91,6 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
         }
         return hasPermissions != null;
     }
-
-    public LocationManager(@NonNull Activity activity, boolean finishOnPlayServicesError, @NonNull LocationCallback locationCallback) {
-        this.activity = activity;
-        this.locationCallback = locationCallback;
-        this.finishOnPlayServicesError = finishOnPlayServicesError;
-    }
-
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -129,8 +121,6 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
             googleApiClient.disconnect();
         }
     }
-
-    private LatLng currentLocation;
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -200,7 +190,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
 
         }
     }
-    private boolean isRefresh = false;
+
     public void start(boolean isRefresh) {
         this.isRefresh = isRefresh;
         if (locationCallback != null) {
@@ -218,7 +208,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
         start(false);
     }
 
-    public boolean isRefresh(){
+    public boolean isRefresh() {
         return isRefresh;
     }
 
@@ -396,6 +386,14 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
                 sendError();
             }
         }
+    }
+
+    public interface LocationCallback {
+        void onGotLocation(LatLng latLng);
+
+        void onLocationFetchError();
+
+        void onPrepare();
     }
 
 }

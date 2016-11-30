@@ -20,12 +20,6 @@ public class ActivityAnimations {
     public static final int SLIDE_LEFT_IN = 3;
     public static final int LIKE_VINE = 4;
 
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({NONE, FADE_IN, FROM_BOTTOM, SLIDE_LEFT_IN, LIKE_VINE})
-
-    public @interface AnimationType {
-    }
-
     public static void doAnimation(Activity activity, @AnimationType int animationType, boolean enter) {
         if (animationType == NONE) {
             activity.overridePendingTransition(-1, -1);
@@ -71,5 +65,11 @@ public class ActivityAnimations {
         } else {
             activity.overridePendingTransition(0, R.anim.slide_bottom_out);
         }
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({NONE, FADE_IN, FROM_BOTTOM, SLIDE_LEFT_IN, LIKE_VINE})
+
+    public @interface AnimationType {
     }
 }

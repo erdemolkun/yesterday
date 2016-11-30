@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">أمس</string>
+    <string name="tomorrow">غدا</string>
+    <string name="today">اليوم</string>
+    <string name="play_services_should_be_updated">تحتاج إلى إعطاء الإذن للوصول إلى معلومات عن الموقع</string>
+    <string name="rain">ماطر</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="settings">إعدادات</string>
+    <string name="check_network_connection_title">لا يوجد اتصال</string>
+    <string name="yesterday">أمس</string>
+    <string name="ok">حسنا</string>
+    <string name="close">قريب</string>
+    <string name="check_network_connection">الرجاء التحقق من اتصال الإنترنت الخاص بك</string>
+    <string name="loading_weather_info">تحميل الطقس.</string>
+    <string name="refresh">تحديث</string>
+</resources>

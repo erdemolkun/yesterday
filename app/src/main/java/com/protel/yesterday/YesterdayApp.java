@@ -1,24 +1,25 @@
 package com.protel.yesterday;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.protel.network.ErrorHandler;
 import com.protel.network.ProNetwork;
+import com.protel.network.ProNetworkBuilder;
 import com.protel.network.Request;
 import com.protel.network.UrlProvider;
-import com.protel.network.interfaces.Logger;
+import com.protel.network.adapter.SimpleLoggerAdapter;
 import com.protel.network.interfaces.UILoadingManager;
 import com.protel.yesterday.service.ServiceConstants;
 import com.protel.yesterday.util.Alerts;
 import com.protel.yesterday.util.L;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -43,8 +44,8 @@ public class YesterdayApp extends Application implements UILoadingManager {
     public void onCreate() {
         super.onCreate();
         appInstance = this;
-        ProNetwork.Builder builder = new ProNetwork.Builder(getApplicationContext());
-        builder.logger(new Logger() {
+        ProNetworkBuilder builder = new ProNetworkBuilder(getApplicationContext());
+        builder.logger(new SimpleLoggerAdapter() {
             @Override
             public void log(String tag, String content) {
                 L.e(tag, content);
@@ -53,16 +54,6 @@ public class YesterdayApp extends Application implements UILoadingManager {
             @Override
             public void log(Exception ex) {
                 L.ex(ex);
-            }
-
-            @Override
-            public void logResponse(int code, String requestedURL, HashMap<String, String> headers, String body) {
-
-            }
-
-            @Override
-            public void logErrorResponse(IOException e) {
-
             }
 
             @Override
@@ -80,9 +71,9 @@ public class YesterdayApp extends Application implements UILoadingManager {
                 return false;
             }
         });
-        ProNetwork proNetwork = ProNetwork.with(builder.build());
-        proNetwork.loading(this);
-        proNetwork.timeout(6000);
+        builder.loading(this);
+        builder.timeout(6000);
+        ProNetwork.init(builder);
     }
 
 
@@ -108,7 +99,7 @@ public class YesterdayApp extends Application implements UILoadingManager {
         Tracker tracker = YesterdayApp.getInstance().getTracker(
                 YesterdayApp.TrackerName.APP_TRACKER);
 
-        if(tracker==null)return;
+        if (tracker == null) return;
 //        // Enable Advertising Features.
 //        tracker.enableAdvertisingIdCollection(true);
 

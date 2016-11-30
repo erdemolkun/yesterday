@@ -34,12 +34,13 @@
     <string name="rain">Yağmurlu</string>
     <string name="snow">Kar Yağışlı</string>
     <string name="sunny">Güneşli</string>
-    <string name="tstorms">Fırtınalı</string>
+    <string name="storms">Fırtınalı</string>
     <string name="mostlysunny">Çoğunlukla Güneşli</string>
     <string name="partlycloudy">Parçalı Bulutlu</string>
     <string name="waiting_location_info">Konum Bilgisi Bekleniyor</string>
     <string name="loading_weather_info">Hava Durumu Yükleniyor.</string>
     <string name="play_services_should_be_updated">Google play servisleri güncellenmeli.</string>
+    <string name="refresh">Yenile</string>
 
 
 </resources>

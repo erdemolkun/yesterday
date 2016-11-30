@@ -9,6 +9,7 @@ import com.protel.yesterday.YesterdayApp;
  * Created by erdemmac on 06/11/15.
  */
 public class AppData {
+    private static final String KEY_IS_FAHRENEIT = "IS_FAHRENEIT";
     private static boolean isFahrenheitType = get();
 
     public static boolean isFahrenheit() {
@@ -19,8 +20,6 @@ public class AppData {
         isFahrenheitType = !isFahrenheitType;
         save();
     }
-
-    private static final String KEY_IS_FAHRENEIT = "IS_FAHRENEIT";
 
     private static void save() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(YesterdayApp.getContext());

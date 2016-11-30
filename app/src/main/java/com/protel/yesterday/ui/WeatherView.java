@@ -32,6 +32,8 @@ import com.protel.yesterday.util.WundergroundUtils;
  */
 public class WeatherView extends RelativeLayout {
 
+    View mRoot;
+
     public WeatherView(Context context) {
         super(context);
         initialize(context, null, 0);
@@ -51,8 +53,6 @@ public class WeatherView extends RelativeLayout {
     public WeatherView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-
-    View mRoot;
 
     private void initialize(Context context, AttributeSet attrs, int defStyle) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(

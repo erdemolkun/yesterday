@@ -3,12 +3,9 @@ package com.protel.yesterday.util;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.protel.yesterday.R;
@@ -46,18 +43,11 @@ public class Alerts {
 
     public static Dialog createLoadingDialog(Context mContext) {
 
-        Dialog d = new Dialog(mContext, R.style.customLoadingDialogTheme);
+        Dialog d = new Dialog(mContext, R.style.Theme_AlertDialog);
         d.setContentView(R.layout.layout_material_progress);
         d.setCancelable(false);
 
-        ((TextView)d.findViewById(R.id.tv_loading_text)).setText(R.string.loading_weather_info);
-
-        ProgressBar progressBar = (ProgressBar) d.findViewById(R.id.progressBar1);
-        if (progressBar != null) {
-            int colorBar = Color.parseColor("#0086FE");
-            progressBar.getIndeterminateDrawable().setColorFilter(colorBar, PorterDuff.Mode.MULTIPLY);
-        }
-
+        ((TextView) d.findViewById(R.id.tv_loading_text)).setText(R.string.loading_weather_info);
 
         return d;
     }

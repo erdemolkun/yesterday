@@ -60,19 +60,15 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
     public static final String EXTRA_PARSE_IMAGE_INDEX = "EXTRA_PARSE_IMAGE_INDEX";
 
     private static final int MIN_SNACKBAR_DURATION = 700;
-
-    private ParseImagesResponse parseImagesResponse;
-    private int parseImageIndex = -1;
     HistoryResponse historyResponse;
     ForecastResponse forecastResponse;
-
+    String TAG = "HomeActivity";
+    private ParseImagesResponse parseImagesResponse;
+    private int parseImageIndex = -1;
     private RequestController requestController;
-
     private WeatherView vTodayRow, vYesterdayRow, vTomorrow;
     private ImageView ivRefresh;
     private TextView tvAddress;
-
-
     /**
      * Root of the layout of this Activity.
      */
@@ -83,7 +79,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
      * https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
+    private LocationManager locationManager;
+    private long waitingGpsStartTime = 0;
+    private Uri baseUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,9 +162,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         }
 
     }
-
-
-    private LocationManager locationManager;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -318,7 +313,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         }
     }
 
-
     @Override
     public void onErrorResponse(Request request, Exception e) {
         ServiceErrorHandler serviceErrorHandler = new ServiceErrorHandler(false);
@@ -329,10 +323,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
             }
         });
     }
-
-
-    private long waitingGpsStartTime = 0;
-
 
     private void finishWithMessage(String message) {
         if (message == null) {
@@ -368,7 +358,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         requestController.addToMainQueue(requestAddress, this);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -386,8 +375,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         locationManager.onDestroy();
         super.onDestroy();
     }
-
-    private Uri baseUri;
 
     private Uri getBaseUri() {
         if (baseUri == null) {
@@ -423,8 +410,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
             }
         });
     }
-
-    String TAG = "HomeActivity";
 
     @Override
     public void onStop() {

@@ -15,12 +15,12 @@
   -->
 
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar_actionbar"
-    style="?actionbarHeaderStyle"
-    android:layout_width="match_parent"
-    android:layout_height="?actionBarSize"
-    app:contentInsetStart="?actionBarInsetStart"
-    app:popupTheme="@style/ActionBarPopupThemeOverlay"
-    app:theme="?toolbarTheme"
-    app:titleTextAppearance="?toolbarTextAppearance" />
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   android:id="@+id/toolbar_actionbar"
+                                   style="?actionbarHeaderStyle"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="?actionBarSize"
+                                   app:contentInsetStart="?actionBarInsetStart"
+                                   app:popupTheme="@style/ActionBarPopupThemeOverlay"
+                                   app:theme="?toolbarTheme"
+                                   app:titleTextAppearance="?toolbarTextAppearance"/>
