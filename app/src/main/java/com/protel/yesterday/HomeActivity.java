@@ -446,4 +446,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         snackbarWaitingGps.show();
     }
 
+    @Override
+    public void onStateChanged(int state) {
+
+    }
+
 }

@@ -30,6 +30,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
+
 import com.protel.yesterday.R;
 import com.protel.yesterday.location.model.LatLng;
 import com.protel.yesterday.util.Alerts;
@@ -119,6 +120,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
         return isRefresh;
     }
 
+
     /**
      * @param isRefresh true should be used when {@link #onlyFirstLocation} is true.
      */
@@ -181,7 +183,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
     private void dismissLocationRequest() {
         if (locationRequest != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
-            state.set(States.READY);
+            updateState(States.READY);
             locationRequest = null;
         }
     }
@@ -202,6 +204,13 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
         }
     }
 
+
+    private void updateState(int state_param) {
+        state.set(state_param);
+        if (locationCallbacks != null) {
+            locationCallbacks.onStateChanged(state.get());
+        }
+    }
 
     /**
      * Requests sdk location permissions. Using #Manifest.permission.ACCESS_FINE_LOCATION
@@ -255,14 +264,14 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
                 .addApi(LocationServices.API)
                 .build();
         googleApiClient.connect();
-        state.set(States.API_CLIENT_CONNECT);
+        updateState(States.API_CLIENT_CONNECT);
     }
 
     /**
      * @return true if play services is available. Otherwise tries to recover and returns false
      */
     private boolean checkPlayServices() {
-        state.set(States.PLAY_SERVICES);
+        updateState(States.PLAY_SERVICES);
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(context);
         if (resultCode != ConnectionResult.SUCCESS) {
@@ -291,7 +300,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
      * false
      */
     private boolean checkSdkLocationPermissions() {
-        state.set(States.SDK_PERMISSION);
+        updateState(States.SDK_PERMISSION);
         // Verify that all required location permissions have been granted.
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -319,7 +328,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
 
     private void requestLocationAfterSettingsControl(final boolean explicitly) {
 
-        state.set(States.LOCATION_SETTINGS);
+        updateState(States.LOCATION_SETTINGS);
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest);
 
@@ -375,7 +384,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
     }
 
     private void requestLocationsIfNeeded() {
-        state.set(States.READY);
+        updateState(States.READY);
         if (requestLocationsAfterReady) {
             requestUpdates();
         } else {
@@ -386,13 +395,13 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
     }
 
     private void sendError() {
-        state.set(States.INITIAL);
+        updateState(States.INITIAL);
         if (locationCallbacks != null) locationCallbacks.onLocationFetchError();
     }
 
     public void requestUpdates() {
         if (isClientConnected()) {
-            state.set(States.REQUESTING_UPDATES);
+            updateState(States.REQUESTING_UPDATES);
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
     }
@@ -456,7 +465,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks, Goo
                 buildGoogleApiClient();
             } else {
                 L.i(TAG, "LOCATION permission was NOT granted.");
-                state.set(States.INITIAL);
+                updateState(States.INITIAL);
                 if (context instanceof Activity) {
                     final Activity activity = (Activity) context;
                     Snackbar.make(activity.findViewById(android.R.id.content), R.string.permission_location_rationale,

@@ -24,4 +24,6 @@ public interface LocationCallbacks {
      * to be used manager manually
      */
     void onReady();
+
+    void onStateChanged(int state);
 }
