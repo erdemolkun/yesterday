@@ -176,10 +176,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
             }
         });
 
-        if (locationManager == null) {
-            locationManager = LocationManagerBuilder.builder().onlyFirstLocation(true).requestLocationsAfterReady(true).callback(this)
-                    .finishOnPlayServicesError(true).start(getApplicationContext());
-        }
+        locationManager = LocationManagerBuilder.builder().onlyFirstLocation(true).requestLocationsAfterReady(true).callback(this)
+                .finishOnPlayServicesError(true).start(getApplicationContext());
 
 
         locationManager.start();
