@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     //keytool -list -v -keystore debug.keystore -alias androiddebugkey -storepass android -keypass android
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.1'
 
     signingConfigs {
         debug {
