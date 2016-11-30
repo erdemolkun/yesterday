@@ -94,7 +94,7 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        YesterdayApp.getInstance().sendTestAnalytics(this);
+        App.getInstance().sendTestAnalytics(this);
         checkPermissionsAndStart();
     }
 

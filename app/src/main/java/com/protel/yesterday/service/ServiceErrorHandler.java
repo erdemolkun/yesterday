@@ -11,7 +11,7 @@ import com.protel.network.RequestController;
 import com.protel.network.exceptions.UnAuthoritedException;
 import com.protel.network.exceptions.UnknowServerException;
 import com.protel.yesterday.R;
-import com.protel.yesterday.YesterdayApp;
+import com.protel.yesterday.App;
 import com.protel.yesterday.util.DialogUtils;
 
 /**
@@ -29,7 +29,7 @@ public class ServiceErrorHandler {
     }
 
     private String getString(Integer resId) {
-        return YesterdayApp.getContext().getString(resId);
+        return App.getContext().getString(resId);
     }
 
     public void handle(final Request request, Exception e, final RequestController requestController, final DetailedErrorHandler errorHandlerListener) {

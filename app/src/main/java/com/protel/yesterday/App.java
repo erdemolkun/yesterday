@@ -25,13 +25,13 @@ import java.util.HashMap;
 /**
  * Created by erdemmac on 28/10/15.
  */
-public class YesterdayApp extends Application implements UILoadingManager {
+public class App extends Application implements UILoadingManager {
     private static final String API_KEY_WUNDERGROUND = "57f760d7577f4b9f";
     private static final String PROPERTY_ID = "UA-58111264-2";
-    private static YesterdayApp appInstance;
+    private static App appInstance;
     private HashMap<TrackerName, Tracker> trackers = new HashMap<>();
 
-    public static YesterdayApp getInstance() {
+    public static App getInstance() {
         return appInstance;
     }
 
@@ -96,8 +96,8 @@ public class YesterdayApp extends Application implements UILoadingManager {
 
     public void sendTestAnalytics(Activity activity) {
         // Get tracker.
-        Tracker tracker = YesterdayApp.getInstance().getTracker(
-                YesterdayApp.TrackerName.APP_TRACKER);
+        Tracker tracker = App.getInstance().getTracker(
+                App.TrackerName.APP_TRACKER);
 
         if (tracker == null) return;
 //        // Enable Advertising Features.

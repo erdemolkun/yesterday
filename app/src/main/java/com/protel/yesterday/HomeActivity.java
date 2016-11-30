@@ -168,7 +168,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        YesterdayApp.getInstance().sendTestAnalytics(this);
+        App.getInstance().sendTestAnalytics(this);
         ivRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
