@@ -1,7 +1,7 @@
 package com.protel.yesterday.service;
 
 import com.protel.network.Request;
-import com.protel.yesterday.data.LatLng;
+import com.protel.yesterday.location.model.LatLng;
 import com.protel.yesterday.service.response.ForecastResponse;
 import com.protel.yesterday.service.response.GeoCoderResponse;
 import com.protel.yesterday.service.response.HistoryResponse;

@@ -31,7 +31,10 @@ import com.protel.network.RequestController;
 import com.protel.network.Response;
 import com.protel.network.interfaces.ResponseListener;
 import com.protel.yesterday.data.AppData;
-import com.protel.yesterday.data.LatLng;
+import com.protel.yesterday.location.LocationCallbacks;
+import com.protel.yesterday.location.LocationManager;
+import com.protel.yesterday.location.LocationManagerBuilder;
+import com.protel.yesterday.location.model.LatLng;
 import com.protel.yesterday.service.RequestGenerator;
 import com.protel.yesterday.service.ServiceConstants;
 import com.protel.yesterday.service.ServiceErrorHandler;
@@ -46,14 +49,13 @@ import com.protel.yesterday.util.ActivityAnimations;
 import com.protel.yesterday.util.DegreeUtils;
 import com.protel.yesterday.util.L;
 import com.protel.yesterday.util.LocalizationManager;
-import com.protel.yesterday.util.LocationManager;
 import com.protel.yesterday.util.WundergroundUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
-public class HomeActivity extends AppCompatActivity implements ResponseListener, ActivityCompat.OnRequestPermissionsResultCallback {
+public class HomeActivity extends AppCompatActivity implements ResponseListener, ActivityCompat.OnRequestPermissionsResultCallback, LocationCallbacks {
 
 
     public static final String EXTRA_PARSE_IMAGES = "EXTRA_PARSE_IMAGES";
@@ -173,38 +175,13 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
                 locationManager.start(true);
             }
         });
-        locationManager = new LocationManager(this, true, new LocationManager.LocationCallback() {
-            @Override
-            public void onGotLocation(LatLng latLng) {
-                ivRefresh.setEnabled(true);
-                long gpsWatingDiff = System.currentTimeMillis() - waitingGpsStartTime;
-                if (gpsWatingDiff > MIN_SNACKBAR_DURATION) {
-                    if (snackbarWaitingGps != null) snackbarWaitingGps.dismiss();
-                } else {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (snackbarWaitingGps != null) snackbarWaitingGps.dismiss();
-                        }
-                    }, MIN_SNACKBAR_DURATION - gpsWatingDiff);
-                }
-                callWeatherRequests(false);
-            }
 
-            @Override
-            public void onLocationFetchError() {
-                if (!locationManager.isRefresh()) {
-                    finishWithMessage(null);
-                } else {
-                    ivRefresh.setEnabled(true);
-                }
-            }
+        if (locationManager == null) {
+            locationManager = LocationManagerBuilder.builder().onlyFirstLocation(true).requestLocationsAfterReady(true).callback(this)
+                    .finishOnPlayServicesError(true).start(getApplicationContext());
+        }
 
-            @Override
-            public void onPrepare() {
-                ivRefresh.setEnabled(false);
-            }
-        });
+
         locationManager.start();
         snackbarWaitingGps = Snackbar.make(findViewById(android.R.id.content), R.string.waiting_location_info, Snackbar.LENGTH_INDEFINITE);
         snackbarWaitingGps.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.refresh_progress_1));
@@ -372,7 +349,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
 
     @Override
     protected void onDestroy() {
-        locationManager.onDestroy();
+        locationManager.destroy();
         super.onDestroy();
     }
 
@@ -438,4 +415,36 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         });
         client.disconnect();
     }
+
+    @Override
+    public void onGotLocation(LatLng latLng, int locationFetchType) {
+        ivRefresh.setEnabled(true);
+        long gpsWatingDiff = System.currentTimeMillis() - waitingGpsStartTime;
+        if (gpsWatingDiff > MIN_SNACKBAR_DURATION) {
+            if (snackbarWaitingGps != null) snackbarWaitingGps.dismiss();
+        } else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (snackbarWaitingGps != null) snackbarWaitingGps.dismiss();
+                }
+            }, MIN_SNACKBAR_DURATION - gpsWatingDiff);
+        }
+        callWeatherRequests(false);
+    }
+
+    @Override
+    public void onLocationFetchError() {
+        if (!locationManager.isManualRefreshMode()) {
+            finishWithMessage(null);
+        } else {
+            ivRefresh.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void onReady() {
+
+    }
+
 }
