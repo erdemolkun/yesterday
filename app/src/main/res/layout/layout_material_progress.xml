@@ -19,7 +19,7 @@
             android:layout_marginStart="8dp"
             android:background="@null"
             android:elevation="2dp"
-            wheel:matProg_barColor="?colorPrimary"
+            wheel:matProg_barColor="#444"
             wheel:matProg_barSpinCycleTime="900"
             wheel:matProg_barWidth="4dp"
             wheel:matProg_circleRadius="26dp"

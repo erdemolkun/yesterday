@@ -181,9 +181,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
 
 
         locationManager.start();
-        snackbarWaitingGps = Snackbar.make(findViewById(android.R.id.content), R.string.waiting_location_info, Snackbar.LENGTH_INDEFINITE);
-        snackbarWaitingGps.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.refresh_progress_1));
-        snackbarWaitingGps.show();
+
         waitingGpsStartTime = System.currentTimeMillis();
     }
 
@@ -315,6 +313,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
 
     private void callWeatherRequests(boolean isSwipe) {
 
+        if (locationManager == null || locationManager.getLatLng() == null) return;
         Request requestHistory = RequestGenerator.historyRequest(locationManager.getLatLng());
         requestHistory.setLoadingIndicatorPolicy(isSwipe ? Request.NO_LOADING : Request.FULL_CONTROL);
         requestHistory.setCachePolicy(isSwipe ? Request.CACHE_POLICY_NONE : Request.CACHE_POLICY_FETCH_AND_LEAVE);
@@ -442,7 +441,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
 
     @Override
     public void onReady() {
-
+        snackbarWaitingGps = Snackbar.make(findViewById(android.R.id.content), R.string.waiting_location_info, Snackbar.LENGTH_INDEFINITE);
+        snackbarWaitingGps.getView().setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.refresh_progress_1));
+        snackbarWaitingGps.show();
     }
 
 }
