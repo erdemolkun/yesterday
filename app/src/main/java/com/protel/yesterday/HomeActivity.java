@@ -179,9 +179,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         locationManager = LocationManagerBuilder.builder().onlyFirstLocation(true).requestLocationsAfterReady(true).callback(this)
                 .finishOnPlayServicesError(true).start(getApplicationContext());
 
-
-        locationManager.start();
-
         waitingGpsStartTime = System.currentTimeMillis();
     }
 
