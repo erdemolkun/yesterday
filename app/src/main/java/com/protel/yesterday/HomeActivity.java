@@ -176,9 +176,10 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
             }
         });
 
-        LocationManagerBuilder locationManagerBuilder = LocationManagerBuilder.builder().onlyFirstLocation(true).requestLocationsAfterReady(true).callback(this)
+        LocationManagerBuilder locationManagerBuilder = LocationManagerBuilder.builder().onlyFirstLocation(true).
+                requestLocationsAfterReady(true).callback(this)
                 .finishOnPlayServicesError(true);
-        locationManager = locationManagerBuilder.build(getApplicationContext());
+        locationManager = locationManagerBuilder.build(this);
         locationManager.start();
         waitingGpsStartTime = System.currentTimeMillis();
     }
@@ -311,7 +312,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
 
     private void callWeatherRequests(boolean isSwipe) {
 
-        if (locationManager == null || locationManager.getLatLng() == null) return;
         Request requestHistory = RequestGenerator.historyRequest(locationManager.getLatLng());
         requestHistory.setLoadingIndicatorPolicy(isSwipe ? Request.NO_LOADING : Request.FULL_CONTROL);
         requestHistory.setCachePolicy(isSwipe ? Request.CACHE_POLICY_NONE : Request.CACHE_POLICY_FETCH_AND_LEAVE);
