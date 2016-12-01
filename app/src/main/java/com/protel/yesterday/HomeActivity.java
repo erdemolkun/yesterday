@@ -18,8 +18,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -172,6 +174,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         ivRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ivRefresh.clearAnimation();
+                ivRefresh.setEnabled(false);
+                startAnimRotate();
                 locationManager.start(true);
             }
         });
@@ -304,6 +309,42 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         finish();
     }
 
+    Animation animRotate;
+
+    private void startAnimRotate() {
+        animRotate = getRotateAnimation();
+        (findViewById(R.id.iv_refresh)).startAnimation(animRotate);
+    }
+
+    private Animation getRotateAnimation() {
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setDuration(2000);
+        rotateAnimation.setRepeatMode(Animation.REVERSE);
+        rotateAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+        rotateAnimation.setRepeatCount(1);
+        rotateAnimation.setFillAfter(true);
+        rotateAnimation.setStartOffset(200);
+        rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (!ivRefresh.isEnabled()) {
+                    animation.start();
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        return rotateAnimation;
+    }
+
     @Override
     public void finish() {
         requestController.cancel();
@@ -413,9 +454,13 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
 
     @Override
     public void onGotLocation(LatLng latLng, int locationFetchType) {
+        if (animRotate != null) {
+//            animRotate.cancel();
+//            ivRefresh.clearAnimation();
+        }
         ivRefresh.setEnabled(true);
-        long gpsWatingDiff = System.currentTimeMillis() - waitingGpsStartTime;
-        if (gpsWatingDiff > MIN_SNACKBAR_DURATION) {
+        long gpsWaitingDiff = System.currentTimeMillis() - waitingGpsStartTime;
+        if (gpsWaitingDiff > MIN_SNACKBAR_DURATION) {
             if (snackbarWaitingGps != null) snackbarWaitingGps.dismiss();
         } else {
             new Handler().postDelayed(new Runnable() {
@@ -423,7 +468,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
                 public void run() {
                     if (snackbarWaitingGps != null) snackbarWaitingGps.dismiss();
                 }
-            }, MIN_SNACKBAR_DURATION - gpsWatingDiff);
+            }, MIN_SNACKBAR_DURATION - gpsWaitingDiff);
         }
         callWeatherRequests(false);
     }
