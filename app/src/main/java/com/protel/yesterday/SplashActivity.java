@@ -19,12 +19,13 @@ import com.protel.network.Request;
 import com.protel.network.RequestController;
 import com.protel.network.Response;
 import com.protel.network.interfaces.ResponseListener;
-import com.protel.yesterday.service.response.ParseImagesResponse;
+import com.protel.yesterday.service.response.FlickrPhotosResponse;
 import com.protel.yesterday.util.Alerts;
 import com.protel.yesterday.util.L;
 import com.protel.yesterday.util.LocalizationManager;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +43,7 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
     private static final int REQUEST_PERMISSION_SETTINGS = 1;
 
     private static final String[] PERMISSIONS_LOCATION = {Manifest.permission.ACCESS_FINE_LOCATION};
-    ParseImagesResponse parseImagesResponse = null;
+    FlickrPhotosResponse flickrPhotosResponse = null;
     int imageIndex = 0;
     private View vRoot;
     private RequestController requestController;
@@ -59,14 +60,19 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
         requestController = new RequestController();
 
 
-        Request request = new Request.Builder().name("Images").id(3).build();
-        request.baseUrl("https://api.parse.com/1/classes/");
-        request.responseClassType = ParseImagesResponse.class;
+        Request request = new Request.Builder().name("").id(3).build();
+        request.baseUrl("https://api.flickr.com/services/rest/?method=flickr.people.getPhotos");
         request.expireAfter(1, TimeUnit.DAYS);
         request.setCachePolicy(Request.CACHE_POLICY_FETCH_AND_LEAVE);
         request.setLoadingIndicatorPolicy(Request.NO_LOADING);
-        request.header("X-Parse-REST-API-Key", "a1Mr32H8hWzn9oy2n4iahv3szA3d3rucFoLhv7z6");
-        request.header("X-Parse-Application-Id", "QjzdphLWuAUmUUJzDQtT3cWEUGeLuKPZgCupaIfQ");
+        request.setParseType(Request.PARSE_TYPE_PLAIN_TEXT);
+
+        HashMap<String, String> form_headers = new HashMap<>();
+        form_headers.put("api_key", "b35ccfe3a6f8f497020e256c13025fba");
+        form_headers.put("user_id", "137409561@N05");
+
+        request.setContentType(Request.CONTENT_TYPE_FORM);
+        request.post(form_headers);
         requestController.addToMainQueue(request, this);
 
     }
@@ -83,8 +89,8 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
             return;
         }
         Intent homeIntent = new Intent(this, HomeActivity.class);
-        if (parseImagesResponse != null) {
-            homeIntent.putExtra(HomeActivity.EXTRA_PARSE_IMAGES, parseImagesResponse);
+        if (flickrPhotosResponse != null) {
+            homeIntent.putExtra(HomeActivity.EXTRA_PARSE_IMAGES, flickrPhotosResponse);
             homeIntent.putExtra(HomeActivity.EXTRA_PARSE_IMAGE_INDEX, imageIndex);
         }
         startActivity(homeIntent);
@@ -109,7 +115,7 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
         } else {
 
             L.e(TAG, "Location permissions have already been granted.");
-            if (parseImagesResponse != null) {
+            if (flickrPhotosResponse != null) {
                 startApp();
             } else {
                 locationPermissionDone = true;
@@ -169,7 +175,7 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
             // Check if the only required permission has been granted
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 L.i(TAG, "LOCATION permission has now been granted. Requesting location.");
-                if (parseImagesResponse != null) {
+                if (flickrPhotosResponse != null) {
                     startApp();
                 }
                 locationPermissionDone = true;
@@ -197,13 +203,19 @@ public class SplashActivity extends AppCompatActivity implements ActivityCompat.
         return this;
     }
 
+
     @Override
     public void onResponse(Response response, Request request) {
-        parseImagesResponse = (ParseImagesResponse) response.data;
+
+        String responseData = (String) response.data;
+
+        flickrPhotosResponse = new FlickrPhotosResponse();
+        flickrPhotosResponse.parse(responseData);
+
         if (locationPermissionDone) {
             Random r = new Random();
             r.setSeed(Calendar.getInstance().getTimeInMillis());
-            imageIndex = r.nextInt(parseImagesResponse.results.size());
+            imageIndex = r.nextInt(flickrPhotosResponse.photos.size());
             // Todo cache background image at startup.
             startApp();
         }

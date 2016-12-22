@@ -42,10 +42,10 @@ import com.protel.yesterday.service.ServiceConstants;
 import com.protel.yesterday.service.ServiceErrorHandler;
 import com.protel.yesterday.service.model.Observation;
 import com.protel.yesterday.service.model.SimpleForecastDay;
+import com.protel.yesterday.service.response.FlickrPhotosResponse;
 import com.protel.yesterday.service.response.ForecastResponse;
 import com.protel.yesterday.service.response.GeoCoderResponse;
 import com.protel.yesterday.service.response.HistoryResponse;
-import com.protel.yesterday.service.response.ParseImagesResponse;
 import com.protel.yesterday.ui.WeatherView;
 import com.protel.yesterday.util.ActivityAnimations;
 import com.protel.yesterday.util.DegreeUtils;
@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
     HistoryResponse historyResponse;
     ForecastResponse forecastResponse;
     String TAG = "HomeActivity";
-    private ParseImagesResponse parseImagesResponse;
+    private FlickrPhotosResponse flickrPhotosResponse;
     private int parseImageIndex = -1;
     private RequestController requestController;
     private WeatherView vTodayRow, vYesterdayRow, vTomorrow;
@@ -97,7 +97,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             if (bundle.containsKey(EXTRA_PARSE_IMAGES)) {
-                parseImagesResponse = (ParseImagesResponse) getIntent().getExtras().getSerializable(EXTRA_PARSE_IMAGES);
+                flickrPhotosResponse = (FlickrPhotosResponse) getIntent().getExtras().getSerializable(EXTRA_PARSE_IMAGES);
             }
             if (bundle.containsKey(EXTRA_PARSE_IMAGE_INDEX)) {
                 parseImageIndex = getIntent().getExtras().getInt(EXTRA_PARSE_IMAGE_INDEX, -1);
@@ -154,14 +154,17 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         if (parseImageIndex < 0) {
             Random r = new Random();
             r.setSeed(Calendar.getInstance().getTimeInMillis());
-            if (parseImagesResponse != null) {
-                index = r.nextInt(parseImagesResponse.results.size());
+            if (flickrPhotosResponse != null) {
+                index = r.nextInt(flickrPhotosResponse.photos.size());
             }
         } else {
             index = parseImageIndex;
         }
         if (index >= 0) {
-            Glide.with(this).load(parseImagesResponse.results.get(index).file_name.url).diskCacheStrategy(DiskCacheStrategy.ALL).animate(R.anim.fade_in).
+            FlickrPhotosResponse.PhotoItem photoItem = flickrPhotosResponse.photos.get(index);
+            String url = "https://farm"+photoItem.farm+".staticflickr.com/"+photoItem.server+"/"+photoItem.id+"_"+photoItem.secret+"_h.jpg";
+                    //https://farm1.staticflickr.com/626/31651053382_0962a02eac_h.jpg
+            Glide.with(this).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).animate(R.anim.fade_in).
                     into((ImageView) findViewById(R.id.iv_home_root));
         }
 
