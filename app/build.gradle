@@ -19,8 +19,8 @@ android {
         applicationId "com.protel.yesterday"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 150
-        versionName "1.5"
+        versionCode 151
+        versionName "1.5.1"
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
     }
     lintOptions {

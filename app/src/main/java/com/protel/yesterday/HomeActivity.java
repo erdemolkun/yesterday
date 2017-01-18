@@ -162,8 +162,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
         }
         if (index >= 0) {
             FlickrPhotosResponse.PhotoItem photoItem = flickrPhotosResponse.photos.get(index);
-            String url = "https://farm"+photoItem.farm+".staticflickr.com/"+photoItem.server+"/"+photoItem.id+"_"+photoItem.secret+"_h.jpg";
-                    //https://farm1.staticflickr.com/626/31651053382_0962a02eac_h.jpg
+            String url = "https://farm" + photoItem.farm + ".staticflickr.com/" + photoItem.server + "/" + photoItem.id + "_" + photoItem.secret + "_h.jpg";
+            //https://farm1.staticflickr.com/626/31651053382_0962a02eac_h.jpg
             Glide.with(this).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).animate(R.anim.fade_in).
                     into((ImageView) findViewById(R.id.iv_home_root));
         }
@@ -232,7 +232,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
             }
             vYesterdayRow.setInfo(dayMin, dayMax, dayNow, true, observationMax.icon, weatherInfo);
         }
-        if (forecastResponse != null) {
+        if (forecastResponse != null && forecastResponse.forecast != null) {
             SimpleForecastDay simpleForecastToday = forecastResponse.forecast.simpleforecast.forecastday.get(0);
             SimpleForecastDay simpleForecastTomorrow = forecastResponse.forecast.simpleforecast.forecastday.get(1);
 
