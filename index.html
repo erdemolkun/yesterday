@@ -1,1 +1,142 @@
-My GitHub Page
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <title>Yesterday</title>
+
+  <link rel="stylesheet" href="stylesheets/styles.css">
+
+  <!-- Owl Carousel Assets -->
+  <link href="owl-carousel/owl.carousel.css" rel="stylesheet">
+  <link href="owl-carousel/owl.theme.css" rel="stylesheet">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
+    <link rel="icon" type="image/png" sizes="144x144"  href="app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#455A64">
+
+  </head>
+
+
+
+
+  <body>
+
+    <script src="assets/js/jquery-1.9.1.min.js"></script> 
+    <script src="owl-carousel/owl.carousel.js"></script>
+
+    <style>
+      body {
+        margin:0px;
+        padding: 0;
+      }
+
+
+      .div-footer{
+        display: flex;
+        padding: 32px;
+        margin-bottom: 32px;
+        background : #607D8B;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      h1{
+        color: #fff;
+        margin: 0;
+        margin-top: 16px;
+      }
+
+
+      .img-icon{
+
+      }
+
+      #owl-item .item{
+        display: block;
+        cursor: pointer;
+        margin: 5px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        text-align: center;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+      }
+
+      #owl-item .item img {
+        max-width: 95%;
+      }
+      #owl-item .item:hover{
+        background: #ccc;
+      }
+
+      .version {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        color: #fff
+      }
+
+    </style>
+
+
+
+    <div class="div-footer">
+      <img class="img-icon" src="playstore/ic_launcher.png" width="96px" height="96px" alt="Icon"/>    
+      <h1>Yesterday</h1>
+      <a class="version" href="https://play.google.com/store/apps/details?id=com.protel.yesterday">v1.5.1</a>
+    </div>
+
+
+    <div id="owl-item">
+
+      <div class="item"><img src="playstore/tr/splash.png" alt="Splash" Image"></div>
+      <div class="item"><img src="playstore/tr/home.png" alt="Home Scren" Image"></div>
+      <div class="item"><img src="playstore/tr/home_start.png" alt="Side Menu" Image"></div>
+      <div class="item"><img src="playstore/tr/home_2.png" alt="Add Alarm" Image"></div>
+      
+      
+
+    </div>
+
+    <script src="javascripts/scale.fix.js"></script>
+    <script type="text/javascript">
+
+      $(document).ready(function() {
+
+        $("#owl-item").owlCarousel({
+
+        autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        navigation:true,
+
+    });
+
+      });
+    </script>
+  </body>
+  
+  </html>
