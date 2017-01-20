@@ -1,6 +1,6 @@
 # Instant-Rates
 
-[![Build Status](https://circleci.com/gh/erdemolkun/yesterday.svg?style=svg&circle-token=c64886e7441d7c6f69bff27a4e2754d06fccb7dc)](https://circleci.com/gh/erdemolkun/yesterday)
+[![Build Status](https://circleci.com/gh/erdemolkun/yesterday/tree/develop.svg?style=svg)](https://circleci.com/gh/erdemolkun/yesterday/tree/develop)
 
 Yesterday is an android application showing weather for yesterday,today and tomorrow
 
