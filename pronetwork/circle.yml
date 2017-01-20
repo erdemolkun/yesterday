@@ -1,0 +1,37 @@
+#
+# Build configuration for Circle CI
+#
+
+general:
+    artifacts:
+        - /home/ubuntu/pronetwork/build/outputs/aar/
+
+machine:
+    environment:
+        ANDROID_HOME: /usr/local/android-sdk-linux
+    java:
+        version: oraclejdk8
+
+
+
+dependencies:
+  pre:
+    - ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --all --filter "tools,platform-tools,android-25,extra-google-m2repository,extra-android-m2repository,extra-android-support"
+    - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.2"
+
+test:
+    override:
+        - (./gradlew assembleDebug):
+            timeout: 360
+
+
+
+#Deploy when tests pass
+deployment:
+    develop: # Alpha builds.
+      branch: develop
+      commands:
+        - (./gradlew assembleDebug --stacktrace):
+                    timeout: 360
+
+

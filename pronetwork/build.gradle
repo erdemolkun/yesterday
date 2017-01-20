@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+    }
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 306
+        versionName "0.3.6"
+        consumerProguardFiles 'consumer-proguard-rules.pro'
+    }
+
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//    }
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.5.0'
+    compile 'com.android.support:support-annotations:25.1.0'
+}
+
+//task clearJar(type: Delete) {
+//    delete 'build/outputs/networklibrary.jar'
+//}
+//
+//task makeJar(type: Copy) {
+//    from('build/intermediates/bundles/release/')
+//    into('build/outputs/')
+//    include('classes.jar')
+//    rename('classes.jar', 'networklibrary.jar')
+//}
