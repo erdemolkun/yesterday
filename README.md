@@ -8,11 +8,11 @@ Yesterday is an android application showing weather for yesterday,today and tomo
 
 
 <p align="center">
-    <img width=320px src="playstore/tr/splash.png" alt="Splash"/>
-    <img width=320px src="playstore/tr/home_2.png" alt="Home"/>
-    <img width=320px src="playstore/tr/home.png" alt="Home"/>
-    <img width=320px src="playstore/tr/home_fah.png" alt="Home"/>
-    <img width=320px src="playstore/tr/home_start.png" alt="Home"/>
+    <img width=320px src="playstore/tr/splash.jpg" alt="Splash"/>
+    <img width=320px src="playstore/tr/home_2.jpg" alt="Home"/>
+    <img width=320px src="playstore/tr/home.jpg" alt="Home"/>
+    <img width=320px src="playstore/tr/home_fah.jpg" alt="Home"/>
+    <img width=320px src="playstore/tr/home_start.jpg" alt="Home"/>
 </p>
 ----------------
 
