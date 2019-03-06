@@ -26,7 +26,7 @@ import java.util.HashMap;
  * Created by erdemmac on 28/10/15.
  */
 public class App extends Application implements UILoadingManager {
-    private static final String API_KEY_WUNDERGROUND = "57f760d7577f4b9f";
+    private static final String API_KEY_WUNDERGROUND = "b2e60c85e184c3c1";
     private static final String PROPERTY_ID = "UA-58111264-2";
     private static App appInstance;
     private HashMap<TrackerName, Tracker> trackers = new HashMap<>();

@@ -4,6 +4,7 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
+        google()
     }
 }
 
@@ -11,35 +12,36 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
-        versionCode 306
-        versionName "0.3.6"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 307
+        versionName "0.3.7"
         consumerProguardFiles 'consumer-proguard-rules.pro'
     }
 
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.5.0'
-    compile 'com.android.support:support-annotations:25.1.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.5.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
 }
 
 //task clearJar(type: Delete) {

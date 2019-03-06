@@ -1,6 +1,6 @@
 package com.protel.yesterday;
 
-import com.google.android.gms.appindexing.Action;
+import com.google.firebase.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -27,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.protel.network.Request;
 import com.protel.network.RequestController;
 import com.protel.network.Response;
@@ -82,7 +81,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
      * ATTENTION: This was auto-generated to implement the App Indexing API. See
      * https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
     private LocationManager locationManager;
     private long waitingGpsStartTime = 0;
     private Uri baseUri;
@@ -136,9 +134,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
                 refreshConversionUI();
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void refreshConversionUI() {
@@ -164,8 +159,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
             FlickrPhotosResponse.PhotoItem photoItem = flickrPhotosResponse.photos.get(index);
             String url = "https://farm" + photoItem.farm + ".staticflickr.com/" + photoItem.server + "/" + photoItem.id + "_" + photoItem.secret + "_h.jpg";
             //https://farm1.staticflickr.com/626/31651053382_0962a02eac_h.jpg
-            Glide.with(this).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).animate(R.anim.fade_in).
-                    into((ImageView) findViewById(R.id.iv_home_root));
+            Glide.with(this).load(url).into((ImageView) findViewById(R.id.iv_home_root));
         }
 
     }
@@ -390,69 +384,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener,
     protected void onDestroy() {
         locationManager.destroy();
         super.onDestroy();
-    }
-
-    private Uri getBaseUri() {
-        if (baseUri == null) {
-            String packageName = getApplicationContext().getPackageName();
-            baseUri = Uri.parse("android-app://" + packageName + "/myapp/");
-        }
-        return baseUri;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW,
-                "Yesterday Weather App",
-                null,
-                getBaseUri()
-        );
-        PendingResult<Status> result = AppIndex.AppIndexApi.start(client, viewAction);
-        result.setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()) {
-                    L.d(TAG, "App Indexing API: Recorded  view end successfully.");
-                } else {
-                    L.e(TAG, "App Indexing API: There was an error recording the recipe view."
-                            + status.toString());
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW,
-                "Yesterday Weather App",
-                null,
-                getBaseUri()
-        );
-        PendingResult<Status> result = AppIndex.AppIndexApi.end(client, viewAction);
-        result.setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()) {
-                    L.d(TAG, "App Indexing API: Recorded  view end successfully.");
-                } else {
-                    L.e(TAG, "App Indexing API: There was an error recording the recipe view."
-                            + status.toString());
-                }
-            }
-        });
-        client.disconnect();
     }
 
     @Override

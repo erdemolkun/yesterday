@@ -2,8 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     //keytool -list -v -keystore debug.keystore -alias androiddebugkey -storepass android -keypass android
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 28
 
     signingConfigs {
         debug {
@@ -17,10 +16,10 @@ android {
 
     defaultConfig {
         applicationId "com.protel.yesterday"
-        minSdkVersion 14
-        targetSdkVersion 25
-        versionCode 151
-        versionName "1.5.1"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 160
+        versionName "1.6.0"
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
     }
     lintOptions {
@@ -30,6 +29,10 @@ android {
 //        // Or, if you prefer, you can continue to check for errors in release builds,
 //        // but continue the build even when errors are found:
 //        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
     buildTypes {
 
@@ -75,17 +78,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile "com.google.android.gms:play-services-location:9.8.0"
-    compile "com.google.android.gms:play-services-analytics:9.8.0"
-    compile "com.android.support:design:25.1.0"
-    compile 'com.facebook.rebound:rebound:0.3.8'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "com.google.android.gms:play-services-location:16.0.0"
+    implementation "com.google.android.gms:play-services-analytics:16.0.7"
+    implementation "com.android.support:design:28.0.0"
+    implementation 'com.facebook.rebound:rebound:0.3.8'
     // Glide library, used to handle asynchronous loading and caching of images.
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile project(':pronetwork')
-    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation project(':pronetwork')
+    implementation 'com.google.firebase:firebase-appindexing:17.1.0'
 }
 
 def Properties propsSigning = new Properties()
